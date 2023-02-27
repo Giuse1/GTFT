@@ -89,7 +89,7 @@ for r in range(N_round):
 
 for k,n in dict_nodes.items():
 
-    n.NAR.to_csv(f"{out_path}/node_{k}_{final_eps}.csv")
+    n.NAR.to_csv(f"{out_path}/multiple_nodes/node_{k}_{final_eps}.csv")
 
 
 
