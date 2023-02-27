@@ -17,7 +17,7 @@ args = parser.parse_args()
 out_path = args.out_path
 final_eps = args.eps
 
-N_round = 50000
+N_round = 100000
 N_nodes = 25
 N_classes = 5
 power_costraints = [0.03, 0.025, 0.02, 0.015, 0.01]
@@ -41,7 +41,7 @@ for _ in range(N_nodes):
 
 
 for r in range(N_round):
-    if r%1000 == 0:
+    if r%10000 == 0:
         print(f"Round {r}")
 
     # idx_r = random.randint(1,N_nodes) # index_requester
