@@ -21,7 +21,6 @@ class Node:
         return to_return
 
     def get_fi(self, class_round):
-        class_round -= 1  # to consider that class 1 has index 0
         try:
             to_return = self.made_requests_accepted[class_round] / self.made_requests[class_round]
         except:
@@ -29,20 +28,23 @@ class Node:
         return to_return
 
     def increase_made_request(self, class_round, rnd):
-        class_round -= 1
         self.made_requests[class_round] += 1
         self.NAR.loc[len(self.NAR)] = [rnd,class_round+1, self.made_requests[class_round],self.made_requests_accepted[class_round]]
 
     def increase_made_request_accepted(self, class_round,rnd):
-        class_round -= 1
         self.made_requests_accepted[class_round] += 1
         self.NAR.loc[len(self.NAR)-1] = [rnd, class_round+1, self.made_requests[class_round],self.made_requests_accepted[class_round]]
 
 
     def increase_received_request(self, class_round):
-        class_round -= 1
         self.received_requests[class_round] += 1
 
     def increase_received_request_accepted(self, class_round):
-        class_round -= 1
         self.received_requests_accepted[class_round] += 1
+
+    def get_l(self, class_round):
+
+        print(no) # todo
+
+        return (self.made_requests_accepted[class_round]/self.made_requests[class_round])/ self.tau # (self.received_requests_accepted[class_round]/self.received_requests[class_round])
+

@@ -46,6 +46,9 @@ args = parser.parse_args()
 in_path = args.in_path
 fig_path = args.fig_path
 eps = args.eps
+N_classes = args.N_classes
+
+markers = ['s','|','o','x','^']
 
 def pltcolor(n):
     return plt.rcParams['axes.prop_cycle'].by_key()['color'][n]

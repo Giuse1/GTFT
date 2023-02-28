@@ -33,7 +33,7 @@ print(f"---------")
 
 print(f"EPS {final_eps}")
 for _ in range(N_nodes):
-    cls = (idx//N_classes)+1
+    cls = (idx//N_classes)
     n = Node(idx+1, cls, power_costraints[cls-1], N_classes)
     print((idx+1, cls, power_costraints[cls-1], N_classes))
     dict_nodes[idx+1] = n
@@ -70,7 +70,9 @@ for r in range(N_round):
 
 for k,n in dict_nodes.items():
 
-    n.NAR.to_csv(f"{out_path}/node_{k}_{final_eps}.csv")
+    tot_tx = sum(n.received_requests_accepted) + sum(n.made_requests_accepted)
+    print(f"Node {n.idx} mean spent power: {tot_tx/N_round}")
+    n.NAR.to_csv(f"{out_path}/one_node/node_{k}_{final_eps}.csv")
 
 
 
