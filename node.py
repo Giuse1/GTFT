@@ -29,11 +29,11 @@ class Node:
 
     def increase_made_request(self, class_round, rnd):
         self.made_requests[class_round] += 1
-        self.NAR.loc[len(self.NAR)] = [rnd,class_round+1, self.made_requests[class_round],self.made_requests_accepted[class_round]]
+        self.NAR.loc[len(self.NAR)] = [rnd,class_round, self.made_requests[class_round],self.made_requests_accepted[class_round]]
 
     def increase_made_request_accepted(self, class_round,rnd):
         self.made_requests_accepted[class_round] += 1
-        self.NAR.loc[len(self.NAR)-1] = [rnd, class_round+1, self.made_requests[class_round],self.made_requests_accepted[class_round]]
+        self.NAR.loc[len(self.NAR)-1] = [rnd, class_round, self.made_requests[class_round],self.made_requests_accepted[class_round]]
 
 
     def increase_received_request(self, class_round):

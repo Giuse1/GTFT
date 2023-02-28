@@ -49,9 +49,9 @@ print(f"EPS {final_eps}")
 for cls, n in enumerate(nodes_per_class):
 
     for _ in range(n):
-        n = Node(idx+1, cls, power_costraints[cls], N_classes)
-        print((idx+1, cls, power_costraints[cls], N_classes))
-        dict_nodes[idx+1] = n
+        n = Node(idx, cls, power_costraints[cls], N_classes)
+        print((idx, cls, power_costraints[cls], N_classes))
+        dict_nodes[idx] = n
         idx += 1
 
 
@@ -61,7 +61,7 @@ for r in range(N_round):
 
     l = np.random.choice(l_list, p=q_l) # number of learners required
     # idx_r = random.randint(1,N) # index_requester
-    idx_nodes = random.sample(range(1,N+1), l+1) # index_requester and index_learners
+    idx_nodes = random.sample(range(0,N), l) # index_requester and index_learners
 
     idx_r = idx_nodes[0]
     idx_learners = idx_nodes[1:]
@@ -87,7 +87,7 @@ for r in range(N_round):
     accepted_request = True
     for idx, learner in enumerate(learner_nodes):
 
-        if learner_node_psi_list[idx] > tau[class_round-1] or learner_node_fi_list[idx] < L[requester_node.cls,class_round]*learner_node_psi_list[idx] - current_eps:
+        if learner_node_psi_list[idx] > tau[class_round] or learner_node_fi_list[idx] < L[requester_node.cls,class_round]*learner_node_psi_list[idx] - current_eps:
             accepted_request = False
             break
 

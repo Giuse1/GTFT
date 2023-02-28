@@ -34,9 +34,9 @@ print(f"---------")
 print(f"EPS {final_eps}")
 for _ in range(N_nodes):
     cls = (idx//N_classes)
-    n = Node(idx+1, cls, power_costraints[cls-1], N_classes)
-    print((idx+1, cls, power_costraints[cls-1], N_classes))
-    dict_nodes[idx+1] = n
+    n = Node(idx, cls, power_costraints[cls], N_classes)
+    print((idx, cls, power_costraints[cls], N_classes))
+    dict_nodes[idx] = n
     idx += 1
 
 
@@ -45,7 +45,7 @@ for r in range(N_round):
         print(f"Round {r}")
 
     # idx_r = random.randint(1,N_nodes) # index_requester
-    idx_r, idx_l = random.sample(range(1,N_nodes+1), 2) # index_requester and index_learner
+    idx_r, idx_l = random.sample(range(0,N_nodes), 2) # index_requester and index_learner
     requester_node = dict_nodes[idx_r]
     learner_node = dict_nodes[idx_l]
     class_round = max(requester_node.cls, learner_node.cls)
@@ -61,7 +61,7 @@ for r in range(N_round):
     if r==1000:
         current_eps = final_eps
 
-    if learner_node_psi > tau[class_round-1] or learner_node_fi < learner_node_psi - current_eps:
+    if learner_node_psi > tau[class_round] or learner_node_fi < learner_node_psi - current_eps:
         pass
     else:
         learner_node.increase_received_request_accepted(class_round)
