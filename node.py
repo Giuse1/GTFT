@@ -9,11 +9,12 @@ class Node:
         self.made_requests_accepted = [0] * n_classes  # A
         self.received_requests = [0] * n_classes  # D
         self.received_requests_accepted = [0] * n_classes  # C
-        self.NAR = pd.DataFrame(columns=["round","class","made","made_accepted"])
+        # self.NAR = pd.DataFrame(columns=["round","class","made","made_accepted"])
+        # self.df = df
+        self.df = pd.DataFrame(columns=["round", "node", "session_class", "type", "accepted"])
 
     def get_psi(self, class_round):
 
-        class_round -= 1  # to consider that class 1 has index 0
         try:
             to_return = self.received_requests_accepted[class_round] / self.received_requests[class_round]
         except:
@@ -29,22 +30,27 @@ class Node:
 
     def increase_made_request(self, class_round, rnd):
         self.made_requests[class_round] += 1
-        self.NAR.loc[len(self.NAR)] = [rnd,class_round, self.made_requests[class_round],self.made_requests_accepted[class_round]]
+        # self.NAR.loc[len(self.NAR)] = [rnd,class_round, self.made_requests[class_round],self.made_requests_accepted[class_round]]
+        self.df.loc[len(self.df)] = [rnd, self.idx, class_round, "made", False]
 
     def increase_made_request_accepted(self, class_round,rnd):
         self.made_requests_accepted[class_round] += 1
-        self.NAR.loc[len(self.NAR)-1] = [rnd, class_round, self.made_requests[class_round],self.made_requests_accepted[class_round]]
+        # self.NAR.loc[len(self.NAR)-1] = [rnd, class_round, self.made_requests[class_round],self.made_requests_accepted[class_round]]
+        self.df.loc[len(self.df)-1] = [rnd, self.idx, class_round, "made", True]
 
 
-    def increase_received_request(self, class_round):
+    def increase_received_request(self, class_round, rnd):
         self.received_requests[class_round] += 1
+        self.df.loc[len(self.df)] = [rnd, self.idx, class_round, "received", False]
 
-    def increase_received_request_accepted(self, class_round):
+
+    def increase_received_request_accepted(self, class_round, rnd):
         self.received_requests_accepted[class_round] += 1
+        self.df.loc[len(self.df)-1] = [rnd, self.idx, class_round, "received", True]
 
-    def get_l(self, class_round):
-
-        print(no) # todo
-
-        return (self.made_requests_accepted[class_round]/self.made_requests[class_round])/ self.tau # (self.received_requests_accepted[class_round]/self.received_requests[class_round])
-
+    # def get_l(self, class_round):
+    #
+    #     print(no) # todo
+    #
+    #     return (self.made_requests_accepted[class_round]/self.made_requests[class_round])/ self.tau # (self.received_requests_accepted[class_round]/self.received_requests[class_round])
+    #
